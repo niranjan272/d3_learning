@@ -1,20 +1,18 @@
-<html>
+<html lang="en">
 <head>
-  <title>"Start of D3" </title>
-  <style type="text/css">
-    div{
-      background-color: red;
-      font-size: 18px;
-      font-weight: bold;
-      color: white;
-    }
-  </style>
+
+<title>D3 Page Template</title>
+<script type="text/javascript" src="../d3/d3.js"></script>
 </head>
 <body>
-  <h1> Start of D3</h1>
-  <div>
-    <p>Hello and welcome to D3</p>
-  </div>
+<script type="text/javascript">
+  var dataset = [5,10,15,20,25];
+  d3.select("body").append("p").text("New Paraghraph")
+  d3.select("body").selectAll("p")
+  .data(dataset)
+  .enter()
+  .append("p")
+  .text("New Paraghraph")
+</script>
 </body>
-
 </html>

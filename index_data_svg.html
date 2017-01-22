@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Creating an empty SVG</title>
+		<script type="text/javascript" src="../d3/d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+      var w = 500;
+      var h = 50;
+      var dataset = [];
+      for (i = 0 ;i<5 ; i++){
+        var new_num = Math.floor(Math.random()*30)
+        dataset.push(new_num)
+      }
+			//Create SVG element
+      var svg = d3.select("body")
+                  .append("svg")
+                  .attr('width', 'w')
+                  .attr('height', 'h')
+			var circles = svg.selectAll("circle")
+                        .data(dataset)
+                        .enter()
+                        .append("circle")
+
+			circles.attr('cx', function(d,i){
+          return (i*50) + 25;
+      })
+      .attr('cy', h/2)
+      .attr('r', function(d){
+              return d;
+      })
+      .attr('fill', 'yellow')
+      .attr('stroke', 'orange')
+      .attr('stroke-wideth', function(d){
+            return d/2;
+      });
+
+		</script>
+	</body>
+</html>
