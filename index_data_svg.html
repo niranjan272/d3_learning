@@ -40,6 +40,26 @@
             return d/2;
       });
 
+			d3.csv("flare.csv", function(d) {
+			  d.value = +d.value;
+			  if (d.value) return d;
+			}, function(error, classes) {
+			  if (error) throw error;
+
+			  var root = d3.hierarchy({children: classes})
+			      .sum(function(d) { return d.value; })
+			      .each(function(d) {
+			        if (id = d.data.id) {
+			          var id, i = id.lastIndexOf(".");
+			          d.id = id;
+			          d.package = id.slice(0, i);
+			          d.class = id.slice(i + 1);
+			        }
+			      });
+
+
+
+
 		</script>
 	</body>
 </html>

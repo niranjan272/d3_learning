@@ -1,6 +1,6 @@
-< html>
+<!DOCTYPE html>
 <head>
-  <title>"Bubble Chart"</title>
+  <title>Bubble Chart</title>
   <script type="text/javascript" src="../d3/d3.js"></script>
   <style type ="text/css">
     text{
@@ -11,17 +11,18 @@
 </head>
 <body>
   <svg width="960" height="880"></svg>
-	<script type="text/javascript">
-  var format = d3.format(",d")
-  var color  = d3.scaleOrdinal("d3.schemeCategory20c")
+  <script type="text/javascript">
+
   var svg = d3.select("svg"),
       width = +svg.attr("width");
+  var format = d3.format(",d");
+  var color  = d3.scaleOrdinal("d3.schemeCategory20c");
   var pack   = d3.pack()
                  .size([width,width])
                  .padding(1.5);
 
 
-  d3.csv('../input_files/data_bubble_chart.csv', function(d) {
+  d3.csv('./../input_files/data_bubble_chart.csv', function(d) {
         d.value = +d.value;
         if (d.value) return d;
       },function(error, classes)
@@ -34,9 +35,9 @@
                           var id,i = id.lastIndexOf(".");
                           d.id = id;
                           d.package = id.slice(0,i);
-                          d.class = id.slic(i+1);
+                          d.class = id.slice(i+1);
                         }
-                     })
+                     });
 
         var node = svg.selectAll(".node")
                       .data(pack(root).leaves())
@@ -49,13 +50,13 @@
 
         node.append("circle")
             .attr('id', function(d){ return d.id ;})
-            .attr('r',  function(d){ return d.r  ;})
-            .attr('fill',function(d){ return color(d.package); }) ;
+            .attr('r',  function(d){ return d.r;})
+            .attr('fill',function(d){ return "hsl(" + Math.random() * 360 + ",100%,50%)";}) ;
 
         node.append("clipPath")
             .attr('id', function(d){ return "clip-" + d.id;})
             .append("use")
-            .attr('xlink:href', function(d){ return "#" + d.id;})
+            .attr('xlink:href', function(d){ return "#" + d.id;});
 
         node.append("text")
             .attr('clip-path', function(d){ return "url(#clip-" +d.id + ")";})
